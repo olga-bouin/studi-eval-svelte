@@ -4,7 +4,6 @@
 	//@TODO split files
 	//import { apiData, drinkNames } from './stores.js';
 	//export let name;
-	export let products;
 
 	import { writable, derived } from 'svelte/store';
 
@@ -14,6 +13,8 @@
 	 **/
 	export const apiData = writable([]);
 	export const apiCatalogData = writable([]);
+
+	export const apiProductsData = writable([]);
 
 	/** Data transformation.
 	 For our use case, we only care about the drink names, not the other information.
@@ -50,9 +51,28 @@
 		});
 	});
 
+	onMount(async () => {
+		fetch("https://back-fastapi.herokuapp.com/api/products/")
+				.then(response => response.json())
+				.then(data => {
+					console.log(data);
+					apiProductsData.set(data);
+				}).catch(error => {
+			console.log(error);
+			return [];
+		});
+	});
+
 	export const catalogs = derived(apiCatalogData, ($apiCatalogData) => {
 		if ($apiCatalogData){
 			return $apiCatalogData;
+		}
+		return [];
+	});
+
+	export const products = derived(apiProductsData, ($apiProductsData) => {
+		if ($apiProductsData){
+			return $apiProductsData;
 		}
 		return [];
 	});
@@ -70,26 +90,6 @@
 			{/each}
 		</ul>
 	</div>
-	<h1>Here is 1st product: {products[0].name}</h1>
-	<div>
-		<ul>
-			{#each products as product}
-				<li>
-					<span>{product.name}</span>
-					<button>{product.price}</button>
-				</li>
-			{/each}
-		</ul>
-	</div>
-	<div>
-		<article>
-			{#each products as product}
-				<Card 	title={product.name}
-						backgroundImage={product.image}
-						price={product.price} />
-			{/each}
-		</article>
-	</div>
 	<main>
 		<h1>Whiskey Drinks Menu</h1>
 		<article>
@@ -97,6 +97,16 @@
 				<Card 	title={drink.strDrink}
 						backgroundImage={drink.strDrinkThumb}
 						price={drink.idDrink} />
+			{/each}
+		</article>
+	</main>
+	<main>
+		<h1>Products DIY</h1>
+		<article>
+			{#each $products as product}
+				<Card 	title={product.libelle}
+						 backgroundImage={product.image}
+						 price={product.prix} />
 			{/each}
 		</article>
 	</main>
