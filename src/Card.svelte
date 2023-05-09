@@ -1,23 +1,23 @@
 <script>
-    import { createEventDispatcher } from "svelte";
     export let title;
     export let price;
     export let backgroundImage;
 </script>
 
-<a>
+<a href="https://www.google.com/search?q={title}" target="_blank">
     <div id="interaction">
         <p>
             {@html title}
         </p>
         <div>
-            <img
-                    src={backgroundImage} />
+            <img alt={title}
+                 src={backgroundImage}/>
         </div>
         <div>
             <p>
                 {@html price} €
             </p>
+        </div>
     </div>
 </a>
 
@@ -34,9 +34,11 @@
         flex: 1 1 20rem;
         margin: 0.5rem;
     }
+
     a:hover {
         cursor: pointer;
     }
+
     img {
         width: 2rem;
         height: 2rem;

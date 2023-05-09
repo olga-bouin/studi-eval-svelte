@@ -1,6 +1,7 @@
 <script>
 	import Card from "./Card.svelte";
 	import { onMount } from "svelte";
+	//@TODO split files
 	//import { apiData, drinkNames } from './stores.js';
 	//export let name;
 	export let products;
