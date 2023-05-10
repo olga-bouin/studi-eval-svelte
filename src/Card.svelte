@@ -42,6 +42,5 @@
     img {
         width: 10rem;
         height: 10rem;
-        filter: invert(1);
     }
 </style>
