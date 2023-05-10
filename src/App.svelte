@@ -106,7 +106,8 @@
 			{#each $products as product}
 				<Card 	title={product.libelle}
 						 image={product.image}
-						 price={product.prix} />
+						 price={product.prix}
+						 promotion={product.promotion}	/>
 			{/each}
 		</article>
 	</main>
