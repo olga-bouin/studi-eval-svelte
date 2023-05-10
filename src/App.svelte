@@ -95,7 +95,7 @@
 		<article>
 			{#each $drinks as drink}
 				<Card 	title={drink.strDrink}
-						backgroundImage={drink.strDrinkThumb}
+						image={drink.strDrinkThumb}
 						price={drink.idDrink} />
 			{/each}
 		</article>
@@ -105,7 +105,7 @@
 		<article>
 			{#each $products as product}
 				<Card 	title={product.libelle}
-						 backgroundImage={product.image}
+						 image={product.image}
 						 price={product.prix} />
 			{/each}
 		</article>

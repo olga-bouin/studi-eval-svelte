@@ -1,7 +1,7 @@
 <script>
     export let title;
     export let price;
-    export let backgroundImage;
+    export let image;
 </script>
 
 <a href="https://www.google.com/search?q={title}" target="_blank">
@@ -11,7 +11,7 @@
         </p>
         <div>
             <img alt={title}
-                 src={backgroundImage}/>
+                 src={image}/>
         </div>
         <div>
             <p>
@@ -42,6 +42,5 @@
     img {
         width: 10rem;
         height: 10rem;
-        filter: invert(1);
     }
 </style>
