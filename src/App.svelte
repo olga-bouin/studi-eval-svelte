@@ -90,7 +90,7 @@
 			{/each}
 		</ul>
 	</div>
-	<main>
+	<div>
 		<h1>Whiskey Drinks Menu</h1>
 		<article>
 			{#each $drinks as drink}
@@ -99,8 +99,8 @@
 						price={drink.idDrink} />
 			{/each}
 		</article>
-	</main>
-	<main>
+	</div>
+	<div>
 		<h1>Products DIY</h1>
 		<article>
 			{#each $products as product}
@@ -109,7 +109,7 @@
 						 price={product.prix} />
 			{/each}
 		</article>
-	</main>
+	</div>
 </main>
 
 <style>
