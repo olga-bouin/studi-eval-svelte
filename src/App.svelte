@@ -1,52 +1,17 @@
 <script>
 	import Card from "./Card.svelte";
 	import { onMount } from "svelte";
-	//@TODO split files
-	//import { apiData, drinkNames } from './stores.js';
-	//export let name;
-
 	import { writable, derived } from 'svelte/store';
-
-	/** Store for your data.
-	 This assumes the data you're pulling back will be an array.
-	 If it's going to be an object, default this to an empty object.
-	 **/
-	export const apiData = writable([]);
 	export const apiCatalogData = writable([]);
-
 	export const apiProductsData = writable([]);
-
-	/** Data transformation.
-	 For our use case, we only care about the drink names, not the other information.
-	 Here, we'll create a derived store to hold the drink names.
-	 **/
-	export const drinks = derived(apiData, ($apiData) => {
-		if ($apiData.drinks){
-			return $apiData.drinks;
-		}
-		return [];
-	});
-
-	onMount(async () => {
-		fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Bourbon")
-				.then(response => response.json())
-				.then(data => {
-					console.log(data);
-					apiData.set(data);
-				}).catch(error => {
-			console.log(error);
-			return [];
-		});
-	});
 
 	onMount(async () => {
 		fetch("https://back-fastapi.herokuapp.com/api/catalog/")
 				.then(response => response.json())
 				.then(data => {
-					console.log(data);
 					apiCatalogData.set(data);
 				}).catch(error => {
-			console.log(error);
+			console.error(error);
 			return [];
 		});
 	});
@@ -55,10 +20,9 @@
 		fetch("https://back-fastapi.herokuapp.com/api/products/")
 				.then(response => response.json())
 				.then(data => {
-					console.log(data);
 					apiProductsData.set(data);
 				}).catch(error => {
-			console.log(error);
+			console.error(error);
 			return [];
 		});
 	});
@@ -91,22 +55,14 @@
 		</ul>
 	</div>
 	<div>
-		<h1>Whiskey Drinks Menu</h1>
-		<article>
-			{#each $drinks as drink}
-				<Card 	title={drink.strDrink}
-						backgroundImage={drink.strDrinkThumb}
-						price={drink.idDrink} />
-			{/each}
-		</article>
-	</div>
-	<div>
 		<h1>Products DIY</h1>
 		<article>
 			{#each $products as product}
 				<Card 	title={product.libelle}
-						 backgroundImage={product.image}
-						 price={product.prix} />
+						 image={product.image}
+						 price={product.prix}
+						 promotion={product.promotion ? product.promotion : 0}
+				/>
 			{/each}
 		</article>
 	</div>
