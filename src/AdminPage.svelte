@@ -5,7 +5,7 @@
 
     export const apiPromotionsData = writable([]);
     onMount(async () => {
-        fetch("https://back-fastapi.herokuapp.com/api/products/")
+        fetch("https://back-fastapi.herokuapp.com/api/promotions/")
             .then(response => {
                 return response.json()
             })
