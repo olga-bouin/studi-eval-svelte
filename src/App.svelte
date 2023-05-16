@@ -1,98 +1,23 @@
 <script>
-	import Card from "./Card.svelte";
-	import { onMount } from "svelte";
-	import { writable, derived } from 'svelte/store';
-	export const apiCatalogData = writable([]);
-	export const apiProductsData = writable([]);
+	import CatalogPage from './CatalogPage.svelte';
+	import AdminPage from './AdminPage.svelte';
 
-	onMount(async () => {
-		fetch("https://back-fastapi.herokuapp.com/api/catalog/")
-				.then(response => response.json())
-				.then(data => {
-					apiCatalogData.set(data);
-				}).catch(error => {
-			console.error(error);
-			return [];
-		});
-	});
 
-	onMount(async () => {
-		fetch("https://back-fastapi.herokuapp.com/api/products/")
-				.then(response => response.json())
-				.then(data => {
-					apiProductsData.set(data);
-				}).catch(error => {
-			console.error(error);
-			return [];
-		});
-	});
+	const webpages = [
+		{ name: "Catalog", component: CatalogPage },
+		{ name: "Administration", component: AdminPage }
+	];
 
-	export const catalogs = derived(apiCatalogData, ($apiCatalogData) => {
-		if ($apiCatalogData){
-			return $apiCatalogData;
-		}
-		return [];
-	});
+	let selectedPage = webpages[0];
+	$: console.dir(selectedPage)
 
-	export const products = derived(apiProductsData, ($apiProductsData) => {
-		if ($apiProductsData){
-			return $apiProductsData;
-		}
-		return [];
-	});
+	const loadPage = (obj) => selectedPage = obj;
 
 </script>
 
-<main>
-	<div>
-		<h1>Catalogs</h1>
-		<ul>
-			{#each $catalogs as catalog}
-				<li>
-					<span>{catalog.libelle}</span>
-				</li>
-			{/each}
-		</ul>
-	</div>
-	<div>
-		<h1>Products DIY</h1>
-		<article>
-			{#each $products as product}
-				<Card 	title={product.libelle}
-						 image={product.image}
-						 price={product.prix}
-						 promotion={product.promotion ? product.promotion : 0}
-				/>
-			{/each}
-		</article>
-	</div>
-</main>
-
-<style>
-	article {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-around;
-		margin: 0.4rem;
-	}
-
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
+{#each webpages as webpageObj}
+	<button class="tablink"
+			title={webpageObj.name}
+			on:click={() => loadPage(webpageObj)}>{webpageObj.name}</button>
+{/each}
+<svelte:component this={selectedPage.component} />
