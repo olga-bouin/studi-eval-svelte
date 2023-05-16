@@ -1,7 +1,8 @@
 <script>
     export let title;
     export let price;
-    export let backgroundImage;
+    export let promotion;
+    export let image;
 </script>
 
 <a href="https://www.google.com/search?q={title}" target="_blank">
@@ -11,12 +12,14 @@
         </p>
         <div>
             <img alt={title}
-                 src={backgroundImage}/>
+                 src={image}/>
         </div>
         <div>
-            <p>
-                {@html price} €
-            </p>
+            {#if !promotion}
+                <p>{@html price} €</p>
+            {:else}
+                <p class="promo">{@html promotion} €</p>
+            {/if}
         </div>
     </div>
 </a>
@@ -42,5 +45,9 @@
     img {
         width: 10rem;
         height: 10rem;
+    }
+    .promo {
+        color: red;
+        font-weight: bold;
     }
 </style>
