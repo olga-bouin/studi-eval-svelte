@@ -15,7 +15,7 @@
                  src={image}/>
         </div>
         <div>
-            {#if !promotion}
+            {#if !promotion || promotion === price}
                 <p>{@html price} €</p>
             {:else}
                 <p class="promo">{@html promotion} €</p>
