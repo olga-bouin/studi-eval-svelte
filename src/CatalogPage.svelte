@@ -27,13 +27,14 @@
 </script>
 
 <main>
-    <h1>Products DIY</h1>
+    <h1>Produits de bricolage</h1>
     <article>
         {#each $products as product}
             <Card title={product.libelle}
                   image={product.image}
                   price={product.prix}
                   promotion={product.promotion ? product.promotion : 0}
+                  id="{product.product_id}"
             />
         {/each}
     </article>

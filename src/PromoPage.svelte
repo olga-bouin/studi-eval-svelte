@@ -55,7 +55,12 @@
     }
 
     function force_compute() {
-        fetch("https://back-fastapi.herokuapp.com/api/products/compute_promotions")
+        fetch("https://back-fastapi.herokuapp.com/api/products/compute_promotions", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
                 return response.json()
             }).then(data => {
@@ -78,14 +83,13 @@
             <label>Promo en % : </label>
             <input type="text" name="pourcentage_promotion" placeholder="Entre 1% et 75%"/>
             <label>Début : </label>
-            <input type="text" name="date_début" placeholder="Date de début"/>
+            <input type="text" name="date_debut" placeholder="Date de début"/>
             <label>Fin : </label>
             <input type="text" name="date_fin" placeholder="Date de fin"/>
-
             <button type="submit">Créer</button>
         </div>
     </form>
-    <button class="force" on:click={force_compute}>Forcer le recalcul des prix promotionnels</button>
+        <button class="force" on:click={force_compute}>Forcer le recalcul des prix promotionnels</button>
 
     <Table tableData={$promotions}/>
 </main>

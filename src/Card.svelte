@@ -3,6 +3,7 @@
     export let price;
     export let promotion;
     export let image;
+    export let id;
 </script>
 
 <a href="https://www.google.com/search?q={title}" target="_blank">
@@ -12,6 +13,7 @@
         </p>
         <div>
             <img alt={title}
+                 title="id: {id}"
                  src={image}/>
         </div>
         <div>

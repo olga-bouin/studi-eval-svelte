@@ -3,7 +3,7 @@
 	import PromoPage from './PromoPage.svelte';
 
 	const webpages = [
-		{ name: "Catalog", component: CatalogPage },
+		{ name: "Catalogue", component: CatalogPage },
 		{ name: "Promotions", component: PromoPage }
 	];
 
