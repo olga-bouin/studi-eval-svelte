@@ -76,20 +76,22 @@
 
 <main>
     <h1>Promotions</h1>
-    <form on:submit|preventDefault={create_promotion}>
-        <div class="input-w">
-            <label>Product ID : </label>
-            <input type="text" name="code_produit" placeholder="Code produit"/>
-            <label>Promo en % : </label>
-            <input type="text" name="pourcentage_promotion" placeholder="Entre 1% et 75%"/>
-            <label>Début : </label>
-            <input type="text" name="date_debut" placeholder="Date de début"/>
-            <label>Fin : </label>
-            <input type="text" name="date_fin" placeholder="Date de fin"/>
-            <button type="submit">Créer</button>
-        </div>
-    </form>
-        <button class="force" on:click={force_compute}>Forcer le recalcul des prix promotionnels</button>
+    <div class="form">
+        <form on:submit|preventDefault={create_promotion}>
+            <div class="input-w">
+                <label for="code_produit">Product ID : </label>
+                <input type="text" id="code_produit" name="code_produit" placeholder="Code produit" required/>
+                <label for="pourcentage_promotion">Promo en % : </label>
+                <input type="text" id="pourcentage_promotion" name="pourcentage_promotion" placeholder="Entre 1% et 75%" required/>
+                <label for="date_debut">Début : </label>
+                <input type="text" id="date_debut" name="date_debut" placeholder="Date de début" required/>
+                <label for="date_fin">Fin : </label>
+                <input type="text" id="date_fin" name="date_fin" placeholder="Date de fin" required/>
+                <button type="submit">Créer</button>
+            </div>
+        </form>
+    </div>
+    <button class="force" on:click={force_compute}>Forcer le recalcul des prix promotionnels</button>
 
     <Table tableData={$promotions}/>
 </main>
@@ -110,6 +112,23 @@
     }
 
     .force {
+        margin: 2px auto;
+        width: 20%;
+        padding: 1em;
+        border: 1px solid #CCC;
+        border-radius: 1em;
+        display: block;
+        margin-bottom: 1em;
+        margin-top: 1em;
+        margin-right: 1em;
         float: right;
+    }
+
+    .form {
+        margin: 0 auto;
+        width: 90%;
+        padding: 1em;
+        border: 1px solid #CCC;
+        border-radius: 1em;
     }
 </style>

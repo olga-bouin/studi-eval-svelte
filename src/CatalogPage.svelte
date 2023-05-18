@@ -28,7 +28,7 @@
     const filter = writable({ status: 'Tout' })
 
     const filtered = derived([filter, products], ([$filter, $products]) => {
-        if ($filter.status == 'Tout') return $products
+        if ($filter.status === 'Tout') return $products
         return $products.filter(x => x.catalog_id === $filter.status)
     })
 
@@ -138,22 +138,5 @@
         background: #4F8A06;
         color: #FFF;
     }
-
-    ul {
-        padding: 0;
-        margin: 0;
-    }
-
-    .content-view {
-        overflow: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-plus-content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
 
 </style>
