@@ -29,7 +29,7 @@
     }
 
     table.blueTable {
-        border: 1px solid #1C6EA4;
+        border: 1px solid #4F8A06;
         background-color: #EEEEEE;
         width: 100%;
         text-align: left;
@@ -46,17 +46,17 @@
         background: #D0E4F5;
     }
     table.blueTable thead {
-        background: #1C6EA4;
-        background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-        background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-        background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+        background: #4F8A06;
+        background: -moz-linear-gradient(top, #4F8A06 0%, #4F8A06 66%, #4F8A06 100%);
+        background: -webkit-linear-gradient(top, #4F8A06 0%, #4F8A06 66%, #4F8A06 100%);
+        background: linear-gradient(to bottom, #4F8A06 0%, #4F8A06 66%, #4F8A06 100%);
         border-bottom: 2px solid #444444;
     }
     table.blueTable thead th {
         font-size: 15px;
         font-weight: bold;
         color: #FFFFFF;
-        border-left: 2px solid #D0E4F5;
+        border-left: 2px solid #dae8c8;
     }
     table.blueTable thead th:first-child {
         border-left: none;

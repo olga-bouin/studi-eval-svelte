@@ -24,12 +24,48 @@
         }
         return [];
     });
+
+    const filter = writable({ status: 'Tout' })
+
+    const filtered = derived([filter, products], ([$filter, $products]) => {
+        if ($filter.status == 'Tout') return $products
+        return $products.filter(x => x.catalog_id === $filter.status)
+    })
+
+    let navItems = [
+        {
+            "title": 'Tout',
+        },
+        {
+            "title": 8936268,
+        },
+        {
+            "title": 8936265,
+        }
+
+
+
+        // Terrasse
+        // Jardin
+        // Outillage
+        // Décoration
+        // Meubles
+        // Matérieux
+        // Électricité
+    ]
+
 </script>
 
 <main>
     <h1>Produits de bricolage</h1>
+    <nav>
+        {#each navItems as item}
+            <button on:click={() => $filter.status = item.title} class:active={$filter.status == item.title}>{item.title}</button>
+        {/each}
+    </nav>
+
     <article>
-        {#each $products as product}
+        {#each $filtered as product}
             <Card title={product.libelle}
                   image={product.image}
                   price={product.prix}
@@ -56,7 +92,7 @@
     }
 
     h1 {
-        color: #ff3e00;
+        color: #4F8A06;
         text-transform: uppercase;
         font-size: 4em;
         font-weight: 100;
@@ -67,4 +103,57 @@
             max-width: none;
         }
     }
+
+
+     /*NAV*/
+
+     :global(html, body) {
+         margin: 0;
+         padding: 0;
+     }
+
+    nav {
+        flex: 0 0 auto;
+        white-space: no-wrap;
+        display: flex;
+        border-bottom: 1px solid #AAA;
+        padding: 12px;
+        overflow-x: scroll;
+        background: #EEE;
+    }
+
+    button {
+        background: none;
+        border: none;
+        appearance: none;
+        display: flex;
+        flex: 0 0 auto;
+        padding: 10px 18px;
+        min-height: 20px;
+        text-decoration: none;
+        border-radius: 24px;
+    }
+
+    button.active {
+        background: #4F8A06;
+        color: #FFF;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .content-view {
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-plus-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+
 </style>
