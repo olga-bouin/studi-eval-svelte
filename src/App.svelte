@@ -1,11 +1,10 @@
 <script>
 	import CatalogPage from './CatalogPage.svelte';
-	import AdminPage from './AdminPage.svelte';
-
+	import PromoPage from './PromoPage.svelte';
 
 	const webpages = [
 		{ name: "Catalog", component: CatalogPage },
-		{ name: "Administration", component: AdminPage }
+		{ name: "Promotions", component: PromoPage }
 	];
 
 	let selectedPage = webpages[0];
@@ -14,7 +13,6 @@
 	const loadPage = (obj) => selectedPage = obj;
 
 </script>
-
 {#each webpages as webpageObj}
 	<button class="tablink"
 			title={webpageObj.name}

@@ -16,9 +16,9 @@
         </div>
         <div>
             {#if !promotion || promotion === price}
-                <p>{@html price} €</p>
+                <p>{@html price.toFixed(2)} €</p>
             {:else}
-                <p class="promo">{@html promotion} €</p>
+                <p class="promo">{@html promotion.toFixed(2)} €</p>
             {/if}
         </div>
     </div>
