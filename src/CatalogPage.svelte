@@ -1,70 +1,42 @@
 <script>
-import Card from "./Card.svelte";
-import {derived, writable} from "svelte/store";
-import {onMount} from "svelte";
-export const apiCatalogData = writable([]);
-export const apiProductsData = writable([]);
+    import Card from "./Card.svelte";
+    import {derived, writable} from "svelte/store";
+    import {onMount} from "svelte";
 
-onMount(async () => {
-    fetch("https://back-fastapi.herokuapp.com/api/catalog/")
-        .then(response => response.json())
-        .then(data => {
-            apiCatalogData.set(data);
-        }).catch(error => {
-        console.error(error);
+    export const apiProductsData = writable([]);
+
+
+    onMount(async () => {
+        fetch("https://back-fastapi.herokuapp.com/api/products/")
+            .then(response => response.json())
+            .then(data => {
+                apiProductsData.set(data);
+            }).catch(error => {
+            console.error(error);
+            return [];
+        });
+    });
+
+
+    export const products = derived(apiProductsData, ($apiProductsData) => {
+        if ($apiProductsData) {
+            return $apiProductsData;
+        }
         return [];
     });
-});
-
-onMount(async () => {
-    fetch("https://back-fastapi.herokuapp.com/api/products/")
-        .then(response => response.json())
-        .then(data => {
-            apiProductsData.set(data);
-        }).catch(error => {
-        console.error(error);
-        return [];
-    });
-});
-
-export const catalogs = derived(apiCatalogData, ($apiCatalogData) => {
-    if ($apiCatalogData){
-        return $apiCatalogData;
-    }
-    return [];
-});
-
-export const products = derived(apiProductsData, ($apiProductsData) => {
-    if ($apiProductsData){
-        return $apiProductsData;
-    }
-    return [];
-});
 </script>
 
 <main>
-    <div>
-        <h1>Catalogs</h1>
-        <ul>
-            {#each $catalogs as catalog}
-                <li>
-                    <span>{catalog.libelle}</span>
-                </li>
-            {/each}
-        </ul>
-    </div>
-    <div>
-        <h1>Products DIY</h1>
-        <article>
-            {#each $products as product}
-                <Card 	title={product.libelle}
-                         image={product.image}
-                         price={product.prix}
-                         promotion={product.promotion ? product.promotion : 0}
-                />
-            {/each}
-        </article>
-    </div>
+    <h1>Products DIY</h1>
+    <article>
+        {#each $products as product}
+            <Card title={product.libelle}
+                  image={product.image}
+                  price={product.prix}
+                  promotion={product.promotion ? product.promotion : 0}
+            />
+        {/each}
+    </article>
 </main>
 
 <style>
