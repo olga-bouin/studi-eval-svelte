@@ -35,7 +35,7 @@
         padding: 1rem;
         background-size: cover;
         text-decoration: none;
-        color: blueviolet;
+        color: #4F8A06;
         flex: 1 1 20rem;
         margin: 0.5rem;
     }
