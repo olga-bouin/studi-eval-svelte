@@ -25,7 +25,7 @@
         return [];
     });
 
-    const filter = writable({ status: 'Tout' })
+    const filter = writable({status: 'Tout'})
 
     const filtered = derived([filter, products], ([$filter, $products]) => {
         if ($filter.status === 'Tout') return $products
@@ -35,24 +35,45 @@
     let navItems = [
         {
             "title": 'Tout',
-        },
-        {
-            "title": 8936268,
+            "category": "Tout"
         },
         {
             "title": 8936265,
+            "category": "Salle de bain"
+        },
+        {
+            title: 8936268,
+            category: "Jardin"
+        },
+        {
+            "title": 8936267,
+            "category": "Terrasse"
+        },
+        {
+            title: 8936266,
+            category: "Cuisine"
+        },
+        {
+            title: 8936269,
+            category: "Outillage"
+        },
+        {
+            title: 8936270,
+            category: "Décoration"
+        },
+        {
+            title: 8936271,
+            category: "Meubles"
+        },
+        {
+            title: 8936272,
+            category: "Matérieux"
+        },
+        {
+            title: 8936273,
+            category: "Électricité"
         }
-
-
-
-        // Terrasse
-        // Jardin
-        // Outillage
-        // Décoration
-        // Meubles
-        // Matérieux
-        // Électricité
-    ]
+    ];
 
 </script>
 
@@ -60,7 +81,8 @@
     <h1>Produits de bricolage</h1>
     <nav>
         {#each navItems as item}
-            <button on:click={() => $filter.status = item.title} class:active={$filter.status == item.title}>{item.title}</button>
+            <button on:click={() => $filter.status = item.title}
+                    class:active={$filter.status === item.title}>{item.category}</button>
         {/each}
     </nav>
 
@@ -105,16 +127,16 @@
     }
 
 
-     /*NAV*/
+    /*NAV*/
 
-     :global(html, body) {
-         margin: 0;
-         padding: 0;
-     }
+    :global(html, body) {
+        margin: 0;
+        padding: 0;
+    }
 
     nav {
         flex: 0 0 auto;
-        white-space: no-wrap;
+        white-space: nowrap;
         display: flex;
         border-bottom: 1px solid #AAA;
         padding: 12px;
