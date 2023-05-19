@@ -25,7 +25,7 @@
         return [];
     });
 
-    const filter = writable({ status: 'Tout' })
+    const filter = writable({status: 'Tout'})
 
     const filtered = derived([filter, products], ([$filter, $products]) => {
         if ($filter.status === 'Tout') return $products
@@ -38,20 +38,20 @@
             "category": "Tout"
         },
         {
-            "title": 8936267,
-            "category": "Terrasse"
-        },
-        {
             "title": 8936265,
             "category": "Salle de bain"
         },
         {
-            title: 8936266,
-            category: "Cuisine"
-        },
-        {
             title: 8936268,
             category: "Jardin"
+        },
+        {
+            "title": 8936267,
+            "category": "Terrasse"
+        },
+        {
+            title: 8936266,
+            category: "Cuisine"
         },
         {
             title: 8936269,
@@ -81,7 +81,8 @@
     <h1>Produits de bricolage</h1>
     <nav>
         {#each navItems as item}
-            <button on:click={() => $filter.status = item.title} class:active={$filter.status === item.title}>{item.category}</button>
+            <button on:click={() => $filter.status = item.title}
+                    class:active={$filter.status === item.title}>{item.category}</button>
         {/each}
     </nav>
 
@@ -126,12 +127,12 @@
     }
 
 
-     /*NAV*/
+    /*NAV*/
 
-     :global(html, body) {
-         margin: 0;
-         padding: 0;
-     }
+    :global(html, body) {
+        margin: 0;
+        padding: 0;
+    }
 
     nav {
         flex: 0 0 auto;
