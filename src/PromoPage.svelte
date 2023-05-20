@@ -3,6 +3,10 @@
     import {derived, writable} from "svelte/store";
     import {onMount} from "svelte";
 
+    let hasError = false;
+    let isSuccessVisible = false;
+    let submitted = false;
+    const errMessage = "Tous les champs sont obligatoires.";
     export const apiPromotionsData = writable([]);
     onMount(async () => {
         fetch("https://back-fastapi.herokuapp.com/api/promotions/extended_promotions_data/")
@@ -52,6 +56,14 @@
         }).catch(error => {
             console.error(error);
         });
+
+        isSuccessVisible = true;
+
+        setTimeout(function(){
+            isSuccessVisible = false;
+        }, 4000);
+
+        event.target.reset();
     }
 
     function force_compute() {
@@ -91,6 +103,9 @@
             </div>
         </form>
     </div>
+        {#if isSuccessVisible}
+            <p class="success-alert" transition:fade={{duration:10}}>La promotion a été ajoutée avec succès</p>
+        {/if}
     <button class="force" on:click={force_compute}>Forcer le recalcul des prix promotionnels</button>
 
     <Table tableData={$promotions}/>
@@ -130,5 +145,10 @@
         padding: 1em;
         border: 1px solid #CCC;
         border-radius: 1em;
+    }
+    .success-alert {
+        padding: 6px;
+        text-align: center;
+        color: #4F8A06;
     }
 </style>
