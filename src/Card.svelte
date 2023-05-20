@@ -6,7 +6,7 @@
     export let id;
 </script>
 
-<a href="https://www.google.com/search?q={title}" target="_blank">
+<div class ="card">
     <div id="interaction">
         <p>
             {@html title}
@@ -24,10 +24,10 @@
             {/if}
         </div>
     </div>
-</a>
+</div>
 
 <style>
-    a {
+    .card {
         display: grid;
         height: 14rem;
         border-radius: 0.5rem;
@@ -40,9 +40,9 @@
         margin: 0.5rem;
     }
 
-    a:hover {
-        cursor: pointer;
-    }
+    /*a:hover {*/
+    /*    cursor: pointer;*/
+    /*}*/
 
     img {
         width: 10rem;
