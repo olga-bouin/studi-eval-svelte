@@ -3,10 +3,7 @@
     import {derived, writable} from "svelte/store";
     import {onMount} from "svelte";
 
-    let hasError = false;
     let isSuccessVisible = false;
-    let submitted = false;
-    const errMessage = "Tous les champs sont obligatoires.";
     export const apiPromotionsData = writable([]);
     onMount(async () => {
         fetch("https://back-fastapi.herokuapp.com/api/promotions/extended_promotions_data/")
@@ -57,12 +54,11 @@
             console.error(error);
         });
 
+        setTimeout(force_compute, 3000);
         isSuccessVisible = true;
-
-        setTimeout(function(){
+        setTimeout(function () {
             isSuccessVisible = false;
-        }, 4000);
-
+        }, 3000);
         event.target.reset();
     }
 
@@ -81,10 +77,7 @@
             console.error(error);
         });
     }
-
-
 </script>
-
 
 <main>
     <h1>Promotions</h1>
@@ -94,7 +87,8 @@
                 <label for="code_produit">Product ID : </label>
                 <input type="text" id="code_produit" name="code_produit" placeholder="Code produit" required/>
                 <label for="pourcentage_promotion">Promo en % : </label>
-                <input type="text" id="pourcentage_promotion" name="pourcentage_promotion" placeholder="Entre 1% et 75%" required/>
+                <input type="text" id="pourcentage_promotion" name="pourcentage_promotion" placeholder="Entre 1% et 75%"
+                       required/>
                 <label for="date_debut">Début : </label>
                 <input type="text" id="date_debut" name="date_debut" placeholder="Date de début" required/>
                 <label for="date_fin">Fin : </label>
@@ -103,10 +97,9 @@
             </div>
         </form>
     </div>
-        {#if isSuccessVisible}
-            <p class="success-alert" transition:fade={{duration:10}}>La promotion a été ajoutée avec succès</p>
-        {/if}
-    <button class="force" on:click={force_compute}>Forcer le recalcul des prix promotionnels</button>
+    {#if isSuccessVisible}
+        <p class="success-alert" transition:fade={{duration:10}}>La promotion a été ajoutée avec succès</p>
+    {/if}
 
     <Table tableData={$promotions}/>
 </main>
@@ -126,26 +119,15 @@
         text-align: center;
     }
 
-    .force {
-        margin: 2px auto;
-        width: 20%;
-        padding: 1em;
-        border: 1px solid #CCC;
-        border-radius: 1em;
-        display: block;
-        margin-bottom: 1em;
-        margin-top: 1em;
-        margin-right: 1em;
-        float: right;
-    }
-
     .form {
         margin: 0 auto;
         width: 90%;
         padding: 1em;
         border: 1px solid #CCC;
         border-radius: 1em;
+        margin-bottom: 2em;
     }
+
     .success-alert {
         padding: 6px;
         text-align: center;
