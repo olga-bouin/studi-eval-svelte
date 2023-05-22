@@ -27,7 +27,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        margin-top: 20px;
     }
     table, th, td {
         border: 1px solid;
