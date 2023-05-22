@@ -4,6 +4,7 @@
     import {onMount} from "svelte";
 
     let isSuccessVisible = false;
+    let isSuccessVisibleProduct = false;
     export const apiPromotionsData = writable([]);
     onMount(async () => {
         fetch("https://back-fastapi.herokuapp.com/api/promotions/extended_promotions_data/")
@@ -77,10 +78,67 @@
             console.error(error);
         });
     }
+
+    function create_product(event) {
+        const formData = new FormData(event.target);
+        const data = {};
+        for (let field of formData) {
+            const [key, value] = field;
+            data[key] = value;
+        }
+        console.log(data)
+
+        fetch("https://back-fastapi.herokuapp.com/api/products/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify
+            ({
+                "libelle": data["libelle_produit"],
+                "prix": data["prix"],
+                "image": data["image"],
+                "catalog_id": data["catalog_id"]
+            })
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            console.log(data);
+        }).catch(error => {
+            console.error(error);
+        });
+
+        isSuccessVisibleProduct = true;
+        setTimeout(function () {
+            isSuccessVisibleProduct = false;
+        }, 3000);
+        event.target.reset();
+    }
 </script>
 
 <main>
-    <h1>Promotions</h1>
+    <h1>Produits et promotions</h1>
+    <p>Créer un produit</p>
+    <div class="form">
+        <form on:submit|preventDefault={create_product}>
+            <div class="input-w">
+                <label for="libelle_produit">Libellé : </label>
+                <input type="text" id="libelle_produit" name="libelle_produit" placeholder="Libellé de produit" required/>
+                <label for="prix">Prix : </label>
+                <input type="text" id="prix" name="prix" placeholder="Prix en euros"
+                       required/>
+                <label for="image">L'url de l'image : </label>
+                <input type="text" id="image" name="image" placeholder="URL de l'image" required/>
+                <label for="catalog_id">Catalog_id</label>
+                <input type="text" id="catalog_id" name="catalog_id" placeholder="Catalog id 8936265-8936273" required/>
+                <button type="submit">Créer</button>
+            </div>
+        </form>
+    </div>
+    {#if isSuccessVisibleProduct}
+        <p class="success-alert">Le produit a été ajouté avec succès</p>
+    {/if}
+    <p>Créer une promotion</p>
     <div class="form">
         <form on:submit|preventDefault={create_promotion}>
             <div class="input-w">
@@ -98,7 +156,7 @@
         </form>
     </div>
     {#if isSuccessVisible}
-        <p class="success-alert" transition:fade={{duration:10}}>La promotion a été ajoutée avec succès</p>
+        <p class="success-alert">La promotion a été ajoutée avec succès</p>
     {/if}
 
     <Table tableData={$promotions}/>

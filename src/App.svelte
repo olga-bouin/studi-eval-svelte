@@ -4,7 +4,7 @@
 
 	const webpages = [
 		{ name: "Catalogue", component: CatalogPage },
-		{ name: "Promotions", component: PromoPage }
+		{ name: "Administration", component: PromoPage }
 	];
 
 	let selectedPage = webpages[0];
