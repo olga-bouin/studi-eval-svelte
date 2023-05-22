@@ -40,10 +40,6 @@
         margin: 0.5rem;
     }
 
-    /*a:hover {*/
-    /*    cursor: pointer;*/
-    /*}*/
-
     img {
         width: 10rem;
         height: 10rem;
