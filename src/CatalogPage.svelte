@@ -67,7 +67,7 @@
         },
         {
             title: 8936272,
-            category: "Matérieux"
+            category: "Matériaux"
         },
         {
             title: 8936273,

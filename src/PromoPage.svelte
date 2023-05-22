@@ -177,13 +177,16 @@
         text-align: center;
     }
 
+    p {
+        padding: 2rem;
+    }
+
     .form {
         margin: 0 auto;
         width: 90%;
         padding: 1em;
         border: 1px solid #CCC;
         border-radius: 1em;
-        margin-bottom: 2em;
     }
 
     .success-alert {
