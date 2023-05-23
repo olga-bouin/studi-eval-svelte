@@ -1,7 +1,7 @@
 import {writable} from 'svelte/store';
 
 const user = "mercadona@gmail.com"
-const pass = "passwd"
+const pass = "123456"
 
 export const store = writable(null);
 
