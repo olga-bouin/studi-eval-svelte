@@ -1,21 +1,38 @@
 <script>
-	import CatalogPage from './CatalogPage.svelte';
-	import PromoPage from './PromoPage.svelte';
+    import CatalogPage from './CatalogPage.svelte';
+    import PromoPage from './PromoPage.svelte';
+    import LoginComponent from "./LoginComponent.svelte";
+    import AfterLogin from "./AfterLogin.svelte";
+    import {store} from "./hooks/auth.js";
+    import LogoutComponent from "./LogoutComponent.svelte";
 
-	const webpages = [
-		{ name: "Catalogue", component: CatalogPage },
-		{ name: "Administration", component: PromoPage }
-	];
+    const webpages = [
+        {name: "Catalogue", component: CatalogPage},
+        {name: "Administration", component: PromoPage},
+        {name: "Login", component: LoginComponent},
+        {name: "Logout", component: LogoutComponent}
+    ];
 
-	let selectedPage = webpages[0];
-	$: console.dir(selectedPage)
+    let selectedPage = webpages[0];
+    $: console.dir(selectedPage)
 
-	const loadPage = (obj) => selectedPage = obj;
+    const loadPage = (obj) => selectedPage = obj;
 
 </script>
 {#each webpages as webpageObj}
-	<button class="tablink"
-			title={webpageObj.name}
-			on:click={() => loadPage(webpageObj)}>{webpageObj.name}</button>
+    {#if $store && webpageObj.name === "Login"}
+        <span/>
+    {:else if !$store && webpageObj.name === "Logout"}
+        <span/>
+    {:else if !$store && webpageObj.name === "Administration"}
+        <span/>
+    {:else}
+        <button class="tablink"
+                title={webpageObj.name}
+                on:click={() => loadPage(webpageObj)}>{webpageObj.name}</button>
+    {/if}
 {/each}
-<svelte:component this={selectedPage.component} />
+{#if $store}
+    <AfterLogin/>
+{/if}
+<svelte:component this={selectedPage.component}/>

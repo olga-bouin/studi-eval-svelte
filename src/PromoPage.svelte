@@ -129,7 +129,7 @@
                        required/>
                 <label for="image">L'url de l'image : </label>
                 <input type="text" id="image" name="image" placeholder="URL de l'image" required/>
-                <label for="catalog_id">Catalog_id</label>
+                <label for="catalog_id">Catalog_id : </label>
                 <input type="text" id="catalog_id" name="catalog_id" placeholder="Catalog id 8936265-8936273" required/>
                 <button type="submit">Créer</button>
             </div>
